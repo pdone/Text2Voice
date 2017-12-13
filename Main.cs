@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System.IO;
-using Baidu.Aip.Speech;
+using Baidu.Aip.Speech;//baidu SDK
+/*
+ * Author: Pdone
+ * Create Date: 2017-12-13
+ * GitHub: https://github.com/pdone/Text2Voice
+ * Weibo: https://weibo.com/pdone/
+*/
 namespace Text2Voice
 {
     public partial class Main : Form
@@ -99,6 +98,11 @@ namespace Text2Voice
             }
             else
                 System.Diagnostics.Process.Start(@"E:\Text2Voice");
+        }
+
+        private void Main_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
