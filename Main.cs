@@ -14,6 +14,7 @@ namespace Text2Voice
 {
     public partial class Main : Form
     {
+        /*0x000000*/
         string APP_ID = "10523072";
         string API_KEY = "0Qr6nHXmGtCFD31ygXYWMAZG";
         string SECRET_KEY = "3a68f4475b803651ac3517459f690093";
