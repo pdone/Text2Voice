@@ -32,6 +32,7 @@
             this.Conversion = new System.Windows.Forms.Button();
             this.OpenFolder = new System.Windows.Forms.Button();
             this.tipInfo = new System.Windows.Forms.Label();
+            this.btnPlaySound = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -41,7 +42,7 @@
             this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.richTextBox1.Location = new System.Drawing.Point(8, 3);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(373, 58);
+            this.richTextBox1.Size = new System.Drawing.Size(363, 58);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "";
             // 
@@ -76,11 +77,23 @@
             this.tipInfo.TabIndex = 3;
             this.tipInfo.Text = "Welcome";
             // 
+            // btnPlaySound
+            // 
+            this.btnPlaySound.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPlaySound.Location = new System.Drawing.Point(254, 67);
+            this.btnPlaySound.Name = "btnPlaySound";
+            this.btnPlaySound.Size = new System.Drawing.Size(117, 38);
+            this.btnPlaySound.TabIndex = 4;
+            this.btnPlaySound.Text = "Play Sound";
+            this.btnPlaySound.UseVisualStyleBackColor = true;
+            this.btnPlaySound.Click += new System.EventHandler(this.btnPlaySound_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(389, 141);
+            this.ClientSize = new System.Drawing.Size(381, 141);
+            this.Controls.Add(this.btnPlaySound);
             this.Controls.Add(this.tipInfo);
             this.Controls.Add(this.OpenFolder);
             this.Controls.Add(this.Conversion);
@@ -89,7 +102,6 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Main";
-            this.Opacity = 0.8D;
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Text2Voice";
@@ -105,6 +117,7 @@
         private System.Windows.Forms.Button Conversion;
         private System.Windows.Forms.Button OpenFolder;
         private System.Windows.Forms.Label tipInfo;
+        private System.Windows.Forms.Button btnPlaySound;
     }
 }
 

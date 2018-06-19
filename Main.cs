@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.IO;
 using Baidu.Aip.Speech;//baidu SDK
+using System.Media;
 /*
  * Author: Pdone
  * Create Date: 2017-12-13
@@ -15,7 +16,7 @@ namespace Text2Voice
     public partial class Main : Form
     {
         /*0x000000*/
-        string APP_ID = "10523072";
+        //string APP_ID = "10523072";
         string API_KEY = "0Qr6nHXmGtCFD31ygXYWMAZG";
         string SECRET_KEY = "3a68f4475b803651ac3517459f690093";
         Color success = Color.SeaGreen;
@@ -67,43 +68,90 @@ namespace Text2Voice
                 {
                     Directory.CreateDirectory(@"E:\Text2Voice\");
                 }
-                string filePath = @"E:\Text2Voice\" + text + ".mp3";
+                string fileName = DateTime.Now.ToString("yyyyMMddHHmmss");
+                string filePath = @"E:\Text2Voice\" + fileName + ".mp3";
+                this.filePath = filePath;
                 File.WriteAllBytes(filePath, result.Data);
-                tipInfo.ForeColor = success;
-                tipInfo.Text = "Success";
+                SetTipInfo(success, "Success");
             }
             else
             {
-                tipInfo.ForeColor = error;
-                tipInfo.Text = "Error";
+                SetTipInfo(error, "Error request");
             }
         }
 
         private void Conversion_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrWhiteSpace(richTextBox1.Text))
-                Tts(richTextBox1.Text.Trim());
-            else
+            try
             {
-                tipInfo.ForeColor = error;
-                tipInfo.Text = "Please enter the correct content";
+                if (!string.IsNullOrWhiteSpace(richTextBox1.Text))
+                    Tts(richTextBox1.Text.Trim());
+                else
+                    SetTipInfo(error, "Input something, please");
+            }
+            catch (Exception ex)
+            {
+                SetTipInfo(error, ex.Message);
             }
         }
 
         private void OpenFolder_Click(object sender, EventArgs e)
         {
-            if (!Directory.Exists(@"E:\Text2Voice\"))
+            try
             {
-                tipInfo.ForeColor = error;
-                tipInfo.Text = "Folder not exist";
+                if (!Directory.Exists(@"E:\Text2Voice\"))
+                {
+                    SetTipInfo(error, "Folder not exist");
+                }
+                else
+                    System.Diagnostics.Process.Start(@"E:\Text2Voice");
             }
-            else
-                System.Diagnostics.Process.Start(@"E:\Text2Voice");
+            catch (Exception ex)
+            {
+                SetTipInfo(error, ex.Message);
+            }
         }
+
+        public void PlaySound(string filePath = null)
+        {
+            try
+            {
+                filePath = this.filePath;
+                if (!string.IsNullOrWhiteSpace(filePath) && File.Exists(filePath))
+                {
+                    MP3Player mp3 = new MP3Player(filePath);
+                    mp3.Play();
+                }
+            }
+            catch (Exception ex)
+            {
+                SetTipInfo(error, ex.Message);
+            }
+        }
+
+        public string filePath { get; set; }
 
         private void Main_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnPlaySound_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                PlaySound();
+            }
+            catch (Exception ex)
+            {
+                SetTipInfo(error, ex.Message);
+            }
+        }
+
+        public void SetTipInfo(Color color, string info)
+        {
+            tipInfo.ForeColor = color;
+            tipInfo.Text = info;
         }
     }
 }
